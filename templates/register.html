@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% comment %} 
+we will use model form which is same the model that we see at the admin panel but the modelform help
+to show it into the frontend in easily way
+{% endcomment %}
+
+<h3>Register page</h3>
+{% csrf_token %}
+{% form%}
+
+{% endblock content %}
