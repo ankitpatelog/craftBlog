@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from . models import Blog,Category
+from . models import Blog,Category,Comment
 # Create your views here.
 
 def posts_by_category(request,category_id):
@@ -22,3 +22,24 @@ def posts_by_category(request,category_id):
     }
     
     return render(request,'posts_by_category.html',context)
+
+
+def blog(request,slug):
+    single_blog = Blog.objects.filter(status='Published', slug=slug)
+    if request.method=='POST':
+        # handle the post request for the comment upload for the particular slug
+        comment = comment()
+        comment.user = request.user
+        comment.blog = single_blog
+        comment.comment = request.POST['comment']
+        comment.save()
+        
+    # else fetch the comment for this blog slug and pass in the form of context into the html template
+    prev_comment  = comment.objects.filter(blog=single_blog)
+    
+    context = {
+        'comment' : prev_comment,
+        'blog': single_blog
+    }
+    
+    return render(request,'blog.html',context)

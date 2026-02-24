@@ -5,6 +5,7 @@ from . import view
 
 from django.conf import settings
 from django.conf.urls.static import static 
+from blogs import views as BlogViews
 
 
 
@@ -12,4 +13,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',view.home,name='home'),
     path('category/',include('blogs.url')),
-]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    # this one to show the blog per slug
+    path('blog/',include('blogs.url')),
+    path('blog/<slug:slug>/', BlogViews.blog ),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -5,10 +5,9 @@ from blogs.models import Category,Blog
 
 def home(request):
     # now fetch the categories to display the all categories
-    categories = Category.objects.all()
+    # we gete the categories from the context_processors
     featured_post = Blog.objects.filter(is_featured=True)
     context = {
-        "categories" : categories,
         "featured_post" : featured_post,
     }
     
