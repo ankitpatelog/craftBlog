@@ -17,4 +17,6 @@ urlpatterns = [
     path('register/',view.register,name='register'),
     path('login/',view.login,name='login'),
     path('logout/',view.logout,name='logout'),
+    # url for dashboard
+    path('dashboard',include('dashboard.url'))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
